@@ -56,8 +56,8 @@ benchmark:
 	log_info "Run benchmarks"
 	which go
 	rm -f benchmark-new.txt
-	go test -bench=. -benchmem ./... | tee benchmark.txt
-	go test -bench=. -benchmem ./... | tee benchmark-new.txt
+	go test -v -bench=. -benchmem ./... | tee benchmark.txt
+	go test -v -bench=. -benchmem ./... | tee benchmark-new.txt
 	go tool -modfile=tools/go.mod benchstat benchmark.txt benchmark-new.txt
 
 # generate documentation server

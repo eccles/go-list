@@ -15,6 +15,20 @@
 
 package list
 
+// Head returns a slice containing the first n duplicates.
+func Head(in []int) []int {
+	pos := 0
+
+	for i := 1; i < len(in); i++ {
+		if in[pos] != in[i] {
+			break
+		}
+		pos = i
+	}
+
+	return in[:pos+1]
+}
+
 // Conflate removes duplicates from a list if the number of duplicates is >
 // than a specified limit.
 func Conflate(in []int, limit int) []int {
@@ -23,20 +37,7 @@ func Conflate(in []int, limit int) []int {
 	i := 0
 
 	for i < len(in)-1 {
-		if in[i+1] != in[i] {
-			out = append(out, in[i])
-			i++
-
-			continue
-		}
-
-		tmp := make([]int, 0)
-
-		for _, d := range in[i:] {
-			if d == in[i] {
-				tmp = append(tmp, d)
-			}
-		}
+		tmp := Head(in[i:])
 
 		if len(tmp) <= limit {
 			out = append(out, tmp...)
