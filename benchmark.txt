@@ -1,0 +1,2 @@
+PASS
+ok  	github.com/eccles/go-list	0.002s
