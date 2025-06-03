@@ -16,7 +16,7 @@
 package list
 
 // Head returns a slice containing the first n duplicates.
-func Head(in []int) []int {
+func Head[T comparable](in []T) []T {
 	pos := 0
 
 	for i := 1; i < len(in); i++ {
@@ -31,8 +31,8 @@ func Head(in []int) []int {
 
 // Conflate removes duplicates from a list if the number of duplicates is >
 // than a specified limit.
-func Conflate(in []int, limit int) []int {
-	var out []int
+func Conflate[T comparable](in []T, limit int) []T {
+	var out []T
 
 	i := 0
 

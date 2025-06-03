@@ -32,6 +32,30 @@ func ExampleHead_duplicates() {
 	// Output: 3 [20 20 20]
 }
 
+func ExampleHead_singletonstring() {
+	a := []string{"10", "20", "20", "20", "30"}
+	b := list.Head(a)
+
+	fmt.Printf(
+		"%d %v",
+		len(b),
+		b,
+	)
+	// Output: 1 [10]
+}
+
+func ExampleHead_duplicatesstring() {
+	a := []string{"20", "20", "20", "30"}
+	b := list.Head(a)
+
+	fmt.Printf(
+		"%d %v",
+		len(b),
+		b,
+	)
+	// Output: 3 [20 20 20]
+}
+
 // Conflate tests.
 
 func ExampleConflate_empty() {
@@ -46,8 +70,32 @@ func ExampleConflate_empty() {
 	// Output: 0 []
 }
 
+func ExampleConflate_emptystring() {
+	a := []string{}
+	b := list.Conflate(a, 2)
+
+	fmt.Printf(
+		"%d %v",
+		len(b),
+		b,
+	)
+	// Output: 0 []
+}
+
 func ExampleConflate_noduplicates() {
 	a := []int{10, 20, 30}
+	b := list.Conflate(a, 2)
+
+	fmt.Printf(
+		"%d %v",
+		len(b),
+		b,
+	)
+	// Output: 3 [10 20 30]
+}
+
+func ExampleConflate_noduplicatesstring() {
+	a := []string{"10", "20", "30"}
 	b := list.Conflate(a, 2)
 
 	fmt.Printf(
