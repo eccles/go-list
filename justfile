@@ -30,6 +30,7 @@ qa:
 	(cd tools && go mod tidy && go mod verify)
 	log_info "Format code"
 	go tool -modfile=tools/go.mod goimports -w .
+	which gofmt
 	gofmt -l -s -w $(find . -type f -name '*.go'| grep -v "/vendor/\|/.git/")
 	log_info "Vetting"
 	go vet ./...

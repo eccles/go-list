@@ -16,6 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: '0'
       - name: Setup ASDF VM
         uses: asdf-vm/actions/install@v4
         with:
@@ -28,7 +30,7 @@ jobs:
         shell: bash
       - name: Check if there are any uncommitted changes
         run: |
-          git diff
+          git diff --exit-code
         shell: bash
       - name: unittest
         run: just unittest
