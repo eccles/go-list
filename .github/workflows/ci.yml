@@ -17,11 +17,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: '0'
-      - name: Setup ASDF VM
+          fetch-depth: 0
+      - name: Install asdf
         uses: asdf-vm/actions/install@v4
-        with:
-          asdf_version: 0.17.0
       - name: tools 
         run: just tools
         shell: bash
