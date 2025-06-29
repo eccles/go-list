@@ -15,29 +15,26 @@
 
 package list
 
-// Head returns a slice containing the first n duplicates.
-func Head[T comparable](in []T) []T {
-	pos := 0
-
-	for i := 1; i < len(in); i++ {
-		if in[pos] != in[i] {
-			break
-		}
-		pos = i
-	}
-
-	return in[:pos+1]
-}
-
 // Conflate removes duplicates from a list if the number of duplicates is >
 // than a specified limit.
 func Conflate[T comparable](in []T, limit int) []T {
 	var out []T
 
 	i := 0
-
 	for i < len(in)-1 {
-		tmp := Head(in[i:])
+		// inline function to return list of duplicates
+		tmp := func(in []T) []T {
+			pos := 0
+
+			for j := 1; j < len(in); j++ {
+				if in[pos] != in[j] {
+					break
+				}
+				pos = j
+			}
+
+			return in[:pos+1]
+		}(in[i:])
 
 		if len(tmp) <= limit {
 			out = append(out, tmp...)
