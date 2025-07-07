@@ -15,36 +15,33 @@
 
 package list
 
-// Conflate removes duplicates from a list if the number of duplicates is >
-// than a specified limit.
-func Conflate[T comparable](in []T, limit int) []T {
-	var out []T
+// Conflate removes consecutive duplicate elements from a slice if the number
+// of consecutive duplicates exceeds the specified limit. Elements are kept
+// if their consecutive count is less than or equal to the limit.
+func Conflate[T comparable](slice []T, limit int) []T {
+	if len(slice) == 0 {
+		return nil
+	}
 
-	i := 0
-	for i < len(in)-1 {
-		// inline function to return list of duplicates
-		tmp := func(in []T) []T {
-			pos := 0
+	result := make([]T, 0, len(slice))
 
-			for j := 1; j < len(in); j++ {
-				if in[pos] != in[j] {
-					break
-				}
-				pos = j
-			}
+	for i := 0; i < len(slice); {
+		count := countConsecutive(slice, i)
 
-			return in[:pos+1]
-		}(in[i:])
-
-		if len(tmp) <= limit {
-			out = append(out, tmp...)
+		if count <= limit {
+			result = append(result, slice[i:i+count]...)
 		}
-		i += len(tmp)
+
+		i += count
 	}
 
-	if i < len(in) {
-		out = append(out, in[i])
-	}
+	return result
+}
 
-	return out
+func countConsecutive[T comparable](slice []T, start int) int {
+	count := 1
+	for j := start + 1; j < len(slice) && slice[start] == slice[j]; j++ {
+		count++
+	}
+	return count
 }
