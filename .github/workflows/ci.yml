@@ -23,6 +23,9 @@ jobs:
       - name: qa
         run: just qa
         shell: bash
+      - name: benchmark
+        run: just benchmark
+        shell: bash
       - name: Check if there are any uncommitted changes
         run: |
           git diff --exit-code
