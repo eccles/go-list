@@ -20,11 +20,11 @@ jobs:
           fetch-depth: 0
       - name: Install asdf
         uses: asdf-vm/actions/install@v4
-      - name: tools 
-        run: just tools
-        shell: bash
       - name: qa
         run: just qa
+        shell: bash
+      - name: benchmark
+        run: just benchmark
         shell: bash
       - name: Check if there are any uncommitted changes
         run: |
